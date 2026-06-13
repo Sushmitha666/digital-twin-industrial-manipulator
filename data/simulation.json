@@ -1,0 +1,59 @@
+{
+  "project": "Digital Twin — 3-DOF Industrial Manipulator",
+  "version": "1.0",
+  "author": "Digital Twin Lab",
+  "description": "Real-time simulation of a 3-DOF planar robotic arm using forward kinematics.",
+
+  "robot": {
+    "dof": 3,
+    "type": "planar",
+    "link_lengths_mm": {
+      "L1": 110,
+      "L2": 90,
+      "L3": 60
+    },
+    "joint_limits_deg": {
+      "J1": { "min": -180, "max": 180 },
+      "J2": { "min": -150, "max": 150 },
+      "J3": { "min": -180, "max": 180 }
+    },
+    "workspace_radius_mm": 260
+  },
+
+  "simulation": {
+    "dt_ms": 50,
+    "duration_s": 10.0,
+    "trajectory_mode": "sinusoidal",
+    "tick_rate_hz": 20
+  },
+
+  "last_state": {
+    "sim_time": 0.0,
+    "joint_angles_deg": [0.0, 0.0, 0.0],
+    "joint_angles_rad": [0.0, 0.0, 0.0],
+    "ee_x_mm": 260.0,
+    "ee_y_mm": 0.0,
+    "reach_mm": 260.0
+  },
+
+  "forward_kinematics": {
+    "method": "cumulative_angle",
+    "equations": {
+      "x": "L1*cos(θ1) + L2*cos(θ1+θ2) + L3*cos(θ1+θ2+θ3)",
+      "y": "L1*sin(θ1) + L2*sin(θ1+θ2) + L3*sin(θ1+θ2+θ3)"
+    }
+  },
+
+  "presets": [
+    { "name": "Home",  "angles_deg": [0,    0,    0  ] },
+    { "name": "Reach", "angles_deg": [90,  -90,   45 ] },
+    { "name": "Left",  "angles_deg": [-60,  60,  -30 ] },
+    { "name": "Fold",  "angles_deg": [30,   30,   30 ] }
+  ],
+
+  "dependencies": {
+    "python": ">=3.9",
+    "numpy": ">=1.24",
+    "matplotlib": ">=3.7"
+  }
+}

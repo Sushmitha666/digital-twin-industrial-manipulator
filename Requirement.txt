@@ -1,0 +1,7 @@
+Software Requirements
+
+• Python 3.9 or later
+• NumPy – Numerical computations and matrix operations
+• Matplotlib – Plotting, visualization, and animation
+• JSON (built-in) – Configuration and state export
+• Time (built-in) – Simulation timing and logging
